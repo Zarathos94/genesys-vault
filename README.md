@@ -1,7 +1,7 @@
-# Solana Vault
+# Genesys Vault
 
 ### Library documentation
-- [Solana Vault](projects/crypto-vault/README.md)
+- [Genesys Vault](projects/crypto-vault/README.md)
 
 There are a few things that we need to get up and running. Before we move forward make sure you've a working NodeJS environment set up. We need Rust, Solana, Mocha(a JS testing framework), Anchor and Phantom wallet installed and properly set up. To install rust, run
 
@@ -64,7 +64,7 @@ Go back to the previous terminal:
     anchor deploy
 ```
 
-After the deploy, you need to update the given Program Id as `declare_id!` in the [`projects/contract/programs/genesysvault/src/lib.rs`](projects/contract/programs/genesysvault/src/lib.rs) file. Also, you need to update the `genesysvaul` field in the ['projects/contract/Anchor.toml](projects/contract/Anchor.toml) file.
+After the deploy, you need to update the given Program Id as `declare_id!` in the [`projects/contract/programs/genesysvault/src/lib.rs`](projects/contract/programs/genesysvault/src/lib.rs) file. Also, you need to update the `genesysvault` field in the ['projects/contract/Anchor.toml](projects/contract/Anchor.toml) file.
 
 ```shell
     anchor test
