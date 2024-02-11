@@ -1,0 +1,14 @@
+{
+  "name": "vault-sdk",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Genesys SOL vault sdk",
+  "main": "index.js",
+  "scripts": {
+    "local": "configuration=local rollup -c",
+    "production": "configuration=production rollup -c",
+    "develop": "configuration=develop rollup -c",
+    "stage": "configuration=stage rollup -c"
+  },
+  "author": "Zarathos94"
+}

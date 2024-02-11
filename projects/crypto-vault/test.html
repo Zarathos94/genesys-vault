@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test</title>
+
+<script async type="module" src="http://localhost:3000/crypto.js"></script>
+
+</head>
+<body>
+    <button onclick="window.Vault.init()">Init</button><br/>
+    <button onclick="window.Vault.connect()">Connect</button><br/>
+
+  <button onclick="prefillData()">Prefill</button><br/>
+  <button type="submit" onclick="saveData()" style="
+  margin-bottom: 50px; ">
+    Buy Now
+  </button><br/>
+  <div class="wrapper" id="frame" style="align-content: center;align-items: center;display: grid;">
+    <label><span class="nmoncd">Name on Card</span><input id="ccname" name="nameoncard" type="text" placeholder="Name"></label><br/>
+    <label><span class="cdnum">Card Number <span>(Dashes not required)</span></span><input id="ccnumber" name="cardnumber" type="text" placeholder="CC Number"></label><br/>
+    <label class="exp"><span class="expdt">Exp. Date</span><input id="ccexp" name="experationdate" type="text" placeholder="MM/YY"></label><br/>
+    <label class="cvv"><span class="cvvnum">CVV</span><input id="cvv" name="cvvnumber" type="text" placeholder="XXX"></label><br/>
+  </div>
+</body>
+<script async>
+
+    customElements.define(
+        "credit-card",
+        class extends HTMLElement {
+          constructor() {
+            super();
+      
+            let cctemplate = document.getElementById("cc-template");
+      
+            const shadowRoot = this.attachShadow({ mode: "open" }).appendChild(
+              cctemplate.content.cloneNode(true)
+            );
+          }
+        }
+      );
+      
+        async function saveData() {
+            const ccnumber = document.getElementById("ccnumber");
+            const ccname = document.getElementById("ccname");
+            const ccexp = document.getElementById("ccexp");
+            const cvv = document.getElementById("cvv");
+            console.log("CC:", ccnumber)
+
+            const res = await window.Vault.saveUserData("7gcrYFSvsmt5UnMGRiQk7T6EmVkhCiL6m5jj2F4qPZUS", JSON.stringify({
+                ccnumber: ccnumber.value,
+                ccname: ccname.value,
+                ccexp: ccexp.value,
+                cvv: cvv.value
+            }) );
+            console.log(res);
+        }
+
+        async function prefillData() {
+            const res = await window.Vault.getUserData("7gcrYFSvsmt5UnMGRiQk7T6EmVkhCiL6m5jj2F4qPZUS");
+            
+            console.log("RES:", res);
+            const resp = JSON.parse(res);
+            document.getElementById("ccnumber").value = resp.ccnumber;
+            document.getElementById("ccname").value = resp.ccname;
+            document.getElementById("ccexp").value = resp.ccexp;
+            document.getElementById("cvv").value = resp.cvv;
+        }
+
+</script>
+</html>
